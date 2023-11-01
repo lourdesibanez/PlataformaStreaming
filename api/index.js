@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 // faltan las rutas
-app.get("/documentales",Documentales.list);
+app.get("/documentales", Documentales.list);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 80;

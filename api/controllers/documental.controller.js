@@ -10,6 +10,16 @@ exports.create = (req, res) => {
 
   const documental = new Documental({
     //id: req.body.id || valor_si_es_nulo (ej 0),
+    id_documental: req.body.id_documental,
+    titulo: req.body.titulo,
+    año: req.body.año,
+    duracion: req.body.duracion,
+    id_administrador: req.body.id_administrador,
+    url: req.body.url,
+    id_proveedor_audiovisual: req.body.id_proveedor_audiovisual,
+    mpaa_id_mpaa: req.body.mpaa_id_mpaa,
+    descripcion: req.body.descripcion,
+    img: req.body.img,
   });
 
   Documental.create(documental, (err, data) => {
@@ -23,7 +33,7 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  Torta.getAll((err, data) => {
+  Documental.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -34,7 +44,7 @@ exports.list = (req, res) => {
 };
 
 exports.getId = (req, res) => {
-  Torta.findById(req.params.id, (err, data) => {
+  Documental.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -58,7 +68,7 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  Torta.updateById(
+  Documental.updateById(
     req.params.id,
     new Torta(req.body),
     (err, data) => {
@@ -78,7 +88,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Torta.remove(req.params.id, (err, data) => {
+  Documental.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

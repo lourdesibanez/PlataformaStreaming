@@ -2,7 +2,16 @@ const sql = require("../db/db.js");
 
 // constructor
 const Documental = function (documental) {
-    //this.campo = torta.campo;
+    this.id_documental = documental.id_documental;
+    this.titulo = documental.titulo;
+    this.año = documental.año;
+    this.duracion = documental.duracion;
+    this.id_administrador = documental.id_administrador;
+    this.url = documental.url;
+    this.id_proveedor_audiovisual = documental.id_proveedor_audiovisual;
+    this.mpaa_id_mpaa = documental.mpaa_id_mpaa;
+    this.descripcion = documental.descripcion;
+    this.img = documental.img;
 };
 
 Documental.create = (newDoc, result) => {
