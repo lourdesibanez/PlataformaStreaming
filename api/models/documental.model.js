@@ -154,4 +154,23 @@ Documental.findByIdRegion = (id, result) => {
     });
 };
 
+Documental.findByIdMpaa = (id, result) => {
+    sql.query(`SELECT id, titulo, anio, duracion, descripcion, img FROM documental WHERE id_mpaa = ${id}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("Documentales encontrados: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Tutorial with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = Documental;
