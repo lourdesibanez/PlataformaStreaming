@@ -135,4 +135,23 @@ Documental.findByIdCat = (id, result) => {
     });
 };
 
+Documental.findByIdRegion = (id, result) => {
+    sql.query(`SELECT id, titulo, anio, duracion, descripcion, img FROM documental inner join documentalxregion ON documental.id = documentalxregion.id_documental WHERE id_region = ${id}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("Documentales encontrados: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Tutorial with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = Documental;

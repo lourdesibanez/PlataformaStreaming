@@ -118,3 +118,19 @@ exports.getIdCat = (req, res) => {
       } else res.send(data);
     });
 };
+
+exports.getIdReg = (req, res) => {
+  Documental.findByIdRegion(req.params.id, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Documental no encontrado id ${req.params.id}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error al buscar id " + req.params.id
+          });
+        }
+      } else res.send(data);
+    });
+};

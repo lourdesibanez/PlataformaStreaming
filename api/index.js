@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.get("/documentales", Documentales.list);
 app.get("/docxcategoria/:id", Documentales.getIdCat);
+app.get("/docxregion/:id", Documentales.getIdReg);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 80;
