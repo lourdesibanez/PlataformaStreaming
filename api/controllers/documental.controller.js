@@ -10,14 +10,14 @@ exports.create = (req, res) => {
 
   const documental = new Documental({
     //id: req.body.id || valor_si_es_nulo (ej 0),
-    id_documental: req.body.id_documental,
+    id: req.body.id,
     titulo: req.body.titulo,
     año: req.body.año,
     duracion: req.body.duracion,
     id_administrador: req.body.id_administrador,
     url: req.body.url,
     id_proveedor_audiovisual: req.body.id_proveedor_audiovisual,
-    mpaa_id_mpaa: req.body.mpaa_id_mpaa,
+    id_mpaa: req.body.id_mpaa,
     descripcion: req.body.descripcion,
     img: req.body.img,
   });
@@ -101,4 +101,20 @@ exports.delete = (req, res) => {
       }
     } else res.send({ message: `Documental borrado!` });
   });
+};
+
+exports.getIdCat = (req, res) => {
+  Documental.findByIdCat(req.params.id, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Documental no encontrado id ${req.params.id}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error al buscar id " + req.params.id
+          });
+        }
+      } else res.send(data);
+    });
 };

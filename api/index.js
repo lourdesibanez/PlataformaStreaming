@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
     res.json({ message: "API Plataforma Streaming" });
 });
 
-// faltan las rutas
 app.get("/documentales", Documentales.list);
+app.get("/docxcategoria/:id", Documentales.getIdCat);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 80;
