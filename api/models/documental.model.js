@@ -28,7 +28,7 @@ Documental.create = (newDoc, result) => {
 };
 
 Documental.findById = (id, result) => {
-    sql.query(`SELECT * FROM documental WHERE id_documental = ${id}`, (err, res) => {
+    sql.query(`SELECT * FROM documental WHERE id = ${id}`, (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
@@ -93,7 +93,7 @@ Documental.remove = (id, result) => {
         }
 
         if (res.affectedRows == 0) {
-            // not found Tutorial with the id
+
             result({ kind: "not_found" }, null);
             return;
         }
@@ -117,60 +117,125 @@ Documental.removeAll = result => {
 };
 
 Documental.findByIdCat = (id, result) => {
-    sql.query(`SELECT id, titulo, anio, duracion, descripcion, img FROM documental inner join categoriaXdocumental ON documental.id = categoriaXdocumental.id_documental WHERE id_categoria = ${id}`, (err, res) => {
+    let query = `SELECT * FROM documental inner join categoriaXdocumental ON documental.id = categoriaXdocumental.id_documental WHERE id_categoria = ${id}`
+    sql.query(query, (err, res) => {
         if (err) {
             console.log("Error: ", err);
-            result(err, null);
+            result(null, err);
             return;
         }
 
-        if (res.length) {
-            console.log("Documentales encontrados: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
 
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
     });
 };
 
 Documental.findByIdRegion = (id, result) => {
-    sql.query(`SELECT id, titulo, anio, duracion, descripcion, img FROM documental inner join documentalxregion ON documental.id = documentalxregion.id_documental WHERE id_region = ${id}`, (err, res) => {
-        if (err) {
-            console.log("Error: ", err);
-            result(err, null);
-            return;
-        }
-
-        if (res.length) {
-            console.log("Documentales encontrados: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
-
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
-    });
+    let query = `SELECT * FROM documental inner join documentalxregion ON documental.id = documentalxregion.id_documental WHERE id_region = ${id}`
+        sql.query(query, (err, res) => {
+            if (err) {
+                console.log("Error: ", err);
+                result(null, err);
+                return;
+            }
+    
+            const filasJSON = res.map((fila) => {
+                return JSON.parse(JSON.stringify(fila));
+            });
+    
+            console.log("Documentales encontrados: ", filasJSON);
+            result(null, filasJSON);
+        });
 };
 
 Documental.findByIdMpaa = (id, result) => {
-    sql.query(`SELECT id, titulo, anio, duracion, descripcion, img FROM documental WHERE id_mpaa = ${id}`, (err, res) => {
+    let query = 'SELECT * FROM documental WHERE id_mpaa = ' + id
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(null, err);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+};
+
+Documental.getFavoritos = (idUsuario, result) => {
+    sql.query(`SELECT id_documental FROM favorito WHERE id_usuario = ${idUsuario}`, (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
             return;
         }
 
-        if (res.length) {
-            console.log("Documentales encontrados: ", res[0]);
-            result(null, res[0]);
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
+
+Documental.getVistos = (idUsuario, result) => {
+    sql.query(`SELECT id_documental FROM visto WHERE id_usuario = ${idUsuario}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
             return;
         }
 
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
     });
-};
+}
+
+Documental.getCategorias = (idDoc, result) => {
+    sql.query(`SELECT id_categoria FROM categoriaxdocumental WHERE id_documental = ${idDoc}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
+
+Documental.getRegiones = (idDoc, result) => {
+    sql.query(`SELECT id_region FROM documentalxregion WHERE id_documental = ${idDoc}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
 
 module.exports = Documental;
