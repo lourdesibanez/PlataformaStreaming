@@ -4,7 +4,16 @@ import { Nav, NavDropdown, Navbar } from 'react-bootstrap'
 const MyNavbar = () => {
     return (
         <>
-            <Navbar.Brand href="#home">DocFlix</Navbar.Brand>
+            <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="/logo-s.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            Docflix
+          </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

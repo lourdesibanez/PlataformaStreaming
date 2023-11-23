@@ -17,7 +17,7 @@ const DocList = () => {
 
     const fetchDocs = async () => {
         try {
-            const res = await fetch('http://localhost/documentales');
+            const res = await fetch('http://localhost/recomendados/1');
             const jsonData = await res.json();
             setDocumentales(jsonData.data);
         }

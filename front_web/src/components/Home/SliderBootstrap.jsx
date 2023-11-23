@@ -1,10 +1,53 @@
 import Carousel from 'react-bootstrap/Carousel';
+import { useState, useEffect } from 'react';
 
 const SliderBootstrap = () => {
+
+    const [documentales, setDocumentales] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+        fetchDocs();
+
+    }, []);
+
+
+    const fetchDocs = async () => {
+        try {
+            const res = await fetch('http://localhost/documentales');
+            const jsonData = await res.json();
+            setDocumentales(jsonData.data);
+        }
+        catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <Carousel fade className='carouselClass'>
-            <Carousel.Item className='carouselItem'>
-                <img 
+            {documentales.slice(0, 3).map((item) => (
+                <Carousel.Item key={item.id} className='carouselItem'> 
+                    <img
+                    src={item.img}
+                    alt='slider'
+                    className='img-slider'
+                />
+                <Carousel.Caption>
+                    <h3>{item.titulo}</h3>
+                    <p>{item.descripcion}</p>
+                </Carousel.Caption>
+                </Carousel.Item>
+            ))}
+            {/* <Carousel.Item className='carouselItem'>
+                <img
                     src="/calden.jpg"
                     alt='slider'
                     className='img-slider'
@@ -15,7 +58,7 @@ const SliderBootstrap = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item className='carouselItem'>
-                <img 
+                <img
                     src="/festival.jpg"
                     alt='slider'
                     className='img-slider'
@@ -26,7 +69,7 @@ const SliderBootstrap = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item className='carouselItem'>
-                <img 
+                <img
                     src="/scooter.jpg"
                     alt='slider'
                     className='img-slider'
@@ -37,7 +80,7 @@ const SliderBootstrap = () => {
                         Praesent commodo cursus magna, vel scelerisque nisl consectetur.
                     </p>
                 </Carousel.Caption>
-            </Carousel.Item>
+            </Carousel.Item> */}
         </Carousel>
     );
 }
