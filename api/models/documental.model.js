@@ -30,20 +30,23 @@ Documental.create = (newDoc, result) => {
 Documental.findById = (id, result) => {
     sql.query(`SELECT * FROM documental WHERE id = ${id}`, (err, res) => {
         if (err) {
-            console.log("Error: ", err);
-            result(err, null);
-            return;
+          console.log("Error: ", err);
+          result(err, null);
+          return;
         }
-
+    
         if (res.length) {
-            console.log("Documental encontrado: ", res[0]);
-            result(null, res[0]);
-            return;
+          // Parsea la primera fila a JSON antes de llamar a la función result
+          const jsonData = JSON.parse(JSON.stringify(res[0]));
+    
+          console.log("Documental encontrado: ", jsonData);
+          result(null, jsonData);
+          return;
         }
-
+    
         // not found Tutorial with the id
         result({ kind: "not_found" }, null);
-    });
+      });
 };
 
 Documental.getAll = (result) => {

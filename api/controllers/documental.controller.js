@@ -159,13 +159,15 @@ exports.getRecomendados = (req, res) => {
   var mpaa = []
   var recomendados = []
 
+  console.log('Recomendados para usuario: '+req.params.idUsuario)
+
   function favoritos() {
     return new Promise(resolve => {
       Documental.getFavoritos(req.params.idUsuario, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Documental no encontrado id ${req.params.idUsuario}.`
+              message: `Usuario no encontrado id ${req.params.idUsuario}.`
             });
           } else {
             res.status(500).send({
@@ -193,7 +195,7 @@ exports.getRecomendados = (req, res) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Documental no encontrado id ${req.params.idUsuario}.`
+              message: `Usuario no encontrado id ${req.params.idUsuario}.`
             });
           } else {
             res.status(500).send({
@@ -299,13 +301,6 @@ exports.getRecomendados = (req, res) => {
             }, 1000);
           });
         }
-
-        /*
-        LLEGUÉ HASTA ACÁ
-
-        FALTARÍA OBTENER EL PARÁMETRO QUE MÁS SE REPITA DE CADA UNO DE LOS FILTROS Y EN BASE A ESO, BUSCAR DOCUMENTALES QUE CUMPLAN CON UNO DE ESTOS Y QUE NO ESTÉN
-        ENTRE LOS VISTOS O FAVORITOS DEL USUARIO, METERLOS EN RECOMENDADOS Y YA ESTARÍA
-        */
 
         Promise.all([getDatos(), getCategorias(), getRegiones()])
           .then(resultados => {
@@ -424,6 +419,8 @@ exports.getRecomendados = (req, res) => {
             Promise.all([recXMPAA(mpaa_), recXCat(categoria), recXRegion(region)])
               .then(resultados => {
                 console.log("Recomendados:" + JSON.stringify(recomendados))
+
+                recomendados = [...new Set(recomendados)];
 
                 res.send(recomendados)
               })

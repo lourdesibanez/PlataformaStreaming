@@ -1,8 +1,10 @@
 const jwt = require("jsonwebtoken");
+const tokenManager = require("../tokenManager")
 
 // next es "pasa o no pasa"
 const verifyToken = (req, res, next) => {
-    const token = req.headers["x-access-token"];
+    //const token = req.headers["x-access-token"];
+    const token = tokenManager.getToken();
 
     if(!token){
         // mensaje de error en caso de que no haya token

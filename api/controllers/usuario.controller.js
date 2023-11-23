@@ -1,15 +1,16 @@
 const bcrypt = require("bcryptjs");
 const sql = require("../db/db.js");
 const jwt = require("jsonwebtoken");
+const tokenManager = require("../tokenManager.js");
 
 exports.login = async (req, res) => {
     // captura de los datos. VER NOMBRES
-    const mail = req.body.mail
+    const username = req.body.username
     const password = req.body.password
 
     console.log("Logueando...");
 
-    await sql.query(`SELECT * FROM usuario WHERE mail = '${mail}'`, async (err, resSql) => {
+    await sql.query(`SELECT * FROM usuario WHERE nombre_usuario = '${username}'`, async (err, resSql) => {
         if (err) throw (err)
             if (resSql.length == 0) {
                 res.status(404).send("usuario no encontrado");
@@ -37,6 +38,8 @@ exports.login = async (req, res) => {
                           }
                         }
                     );
+                    
+                    tokenManager.setToken(token);
                     console.log("Acceso correcto. Token: ",token);
                     res.status(200).json(usuario);
                 }

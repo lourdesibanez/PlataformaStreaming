@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
 
 const Documentales = require('./controllers/documental.controller.js');
 const Usuario = require("./controllers/usuario.controller.js");
@@ -35,7 +36,7 @@ app.get("/generarPass/:pass", (req, res) => {
     })
   });
   
-app.get("/login", Usuario.login);
+app.post("/login", Usuario.login);
 
 app.get("/documentales", Documentales.list);
 app.get("/docxcategoria/:id", Documentales.getIdCat);
