@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DocCardHome from './DocCardHome'
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,19 +8,33 @@ const DocList = () => {
 
     const [documentales, setDocumentales] = useState([]);
     const [loading, setLoading] = useState(true);
+    // Obtener el token guardado en localStorage
+    let navigate = useNavigate();
 
     useEffect(() => {
-
-        fetchDocs();
+        const token = localStorage.getItem('token');
+        console.log(token);
+        if(token){
+            fetchDocs(token);
+        }
+        else{
+            console.log("User no logueado");
+            navigate("/login");
+        }
 
     }, []);
 
-
-    const fetchDocs = async () => {
+    const fetchDocs = async (token) => {
         try {
-            const res = await fetch('http://localhost/recomendados/1');
+            const res = await fetch('http://localhost:8888/recomendados/1', {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                }});
             const jsonData = await res.json();
-            setDocumentales(jsonData.data);
+            setDocumentales(jsonData);
+            console.log("entre al fetch")
         }
         catch (error) {
             console.log(error);
@@ -29,7 +44,7 @@ const DocList = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="custom-loader"></div>;
     }
 
     return (

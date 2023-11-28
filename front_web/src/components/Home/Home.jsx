@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container } from 'react-bootstrap'
 import SliderBootstrap from './SliderBootstrap'
 import Catalog from '../Catalogo/Catalog'

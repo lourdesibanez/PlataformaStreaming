@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/Header';
 import { Container, ThemeProvider } from 'react-bootstrap';
 import Home from './components/Home/Home';
-import Catalog from './components/Catalogo/Catalog';
 import DocList from './components/Home/DocList';
+import Login from './components/Login/Login';
 
 function App() {
   /* const [count, setCount] = useState(0) */
@@ -24,6 +24,9 @@ function App() {
           />
           <Route path='/recomendados'
             element={<DocList />}
+          />
+          <Route path='/login'
+            element={<Login />}
           />
         </Routes>
           {/* <Home /> 

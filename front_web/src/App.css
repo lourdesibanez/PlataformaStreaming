@@ -1,9 +1,9 @@
-.carouselClass{
+.carouselClass {
   height: 50vh;
   overflow: hidden;
 }
 
-.carouselItem{
+.carouselItem {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,23 +11,55 @@
   height: 100%;
 }
 
-.img-slider{
+.img-slider {
   width: 100%;
   height: 50vh;
-  object-fit:cover; 
+  object-fit: cover;
   object-position: center;
 }
 
 /* Seccion listas de docs en home*/
+.custom-loader {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+}
+.custom-loader::before,
+.custom-loader::after {    
+    content:"";
+    grid-area: 1/1;
+    --c: radial-gradient(farthest-side,#F9C565 92%,#0000);
+    background: 
+      var(--c) 50%  0, 
+      var(--c) 50%  100%, 
+      var(--c) 100% 50%, 
+      var(--c) 0    50%;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    animation: s2 1s infinite;
+}
+.custom-loader::before {
+  margin:4px;
+  filter:hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
 
-.Doclist{
+@keyframes s2{ 
+  100%{transform: rotate(.5turn)}
+}
+
+.Doclist {
   display: flex;
   height: 100%;
   justify-content: center;
   align-items: center;
 }
 
-.titulo-cat{
+.titulo-cat {
   font-size: 1.2rem;
   color: #fafafa;
   margin: 20px 0px;
@@ -35,15 +67,15 @@
   font-weight: 300;
 }
 
-.catalog-content{
+.catalog-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-column-gap: 1rem;
   grid-row-gap: 2rem;
   padding: 20px 40px;
-} 
+}
 
-.catalog-img{
+.catalog-img {
   width: 100%;
   height: 30vh;
   object-fit: cover;
@@ -51,8 +83,88 @@
   margin-bottom: 1rem;
 }
 
-.catalog-img-title{
+.catalog-img-title {
   font-size: 1rem;
   color: #fff;
   text-align: center;
+}
+
+/* LOGIN STYLES*/
+.container-form {
+  height: 80vh;
+  position: relative;
+}
+
+.logo-back {
+  width: 240px;
+  height: 240px;
+  position: absolute;
+  left: 40%;
+  top: 35%;
+  background-image: url("/logo-s.png");
+  background-size: cover;
+}
+
+.form-login {
+  width: 340px;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(56, 56, 56, 0.44);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+  border: 1px solid rgba(56, 56, 56, 0.25);
+}
+
+.form-login h3 {
+  color: #fafafa;
+}
+
+.form-login button {
+  width: 200px;
+  height: 40px;
+  background-color: #fafafa;
+  color: #2c2c2c;
+  border-radius: 40px;
+  margin-top: 16px;
+  border: none;
+  transition: ease-in-out 300ms;
+}
+
+.form-input-group {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  padding: 0 40px;
+}
+
+.form-input-group label {
+  color: #fafafa;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.form-input-group input {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 30px;
+  height: 30px;
+  border: none;
+  margin: 0 20px;
+}
+
+.form-login button:hover {
+  background: rgb(68, 207, 211);
+  background: linear-gradient(90deg, rgba(68, 207, 211, 1) 0%, rgba(224, 99, 125, 1) 100%);
+  color: #fff;
+  transform: scale(1.1, 1.1);
 }
