@@ -1,27 +1,35 @@
 import { useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
     const [isLogged, setIsLogged] = useState(false);
+    let navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         setIsLogged(!!token); // Establece el estado de isLogged según la presencia del token
     }, []);
 
+    const handleLogout = () => {
+        // Elimino el token del localStorage
+        localStorage.removeItem('token');
+        navigate("/");
+      };
+      
+
     return (
         <>
-            <Navbar.Brand href="#home">
+            <Link className="navbar-brand " to="/">
             <img
               alt=""
               src="/logo-s.png"
               width="30"
               height="30"
               className="d-inline-block align-top"
-            />{' '}
+            />
             Docflix
-          </Navbar.Brand>
+          </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -30,11 +38,7 @@ const MyNavbar = () => {
                     {!isLogged ? (
                         <Link className="nav-link" to="/login">Iniciar Sesion</Link>
                     ) : (
-                        <Link className="nav-link" to="/login">Cerrar Sesion</Link>
-                        /* ACA EN VEZ DE REDIRECCIONAR FALTARIA MAS BIEN, AGREGAR UNA FUNCION COMO X EJ
-                            handleLogOut() Y LLAMARLA DESDE EL BOTTON CON UN ONCLICK EVENT. QUE LO UNICO QUE HARIA ES ELIMINAR EL TOKEN DEL LOCALSTORAGE
-                            POR LO QUE SI SE QUIERE VISUALIZAR CONTENIDO DEBE LOGEARSE DE NUEVO PORQUE NO HAY TOKEN
-                        */
+                        <button className='nav-link' onClick={()=> handleLogout()}>Cerrar Sesion</button>
                     )
                     }
                 </Nav>

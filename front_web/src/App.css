@@ -81,12 +81,19 @@
   object-fit: cover;
   border-radius: 1rem;
   margin-bottom: 1rem;
+  transition: ease-in-out 300ms;
 }
 
 .catalog-img-title {
   font-size: 1rem;
   color: #fff;
   text-align: center;
+
+}
+
+.catalog-img:hover{
+  cursor: pointer;
+  transform: scale(1.1,1.1);
 }
 
 /* LOGIN STYLES*/

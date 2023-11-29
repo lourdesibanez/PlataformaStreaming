@@ -6,6 +6,7 @@ import { Container, ThemeProvider } from 'react-bootstrap';
 import Home from './components/Home/Home';
 import DocList from './components/Home/DocList';
 import Login from './components/Login/Login';
+import Stream from './components/Catalogo/Stream';
 
 function App() {
   /* const [count, setCount] = useState(0) */
@@ -19,16 +20,19 @@ function App() {
           minBreakpoint="xxs"
         >
           <Routes>
-          <Route path='/'
-            element={<Home />}
-          />
-          <Route path='/recomendados'
-            element={<DocList />}
-          />
-          <Route path='/login'
-            element={<Login />}
-          />
-        </Routes>
+            <Route path='/'
+              element={<Home />}
+            />
+            <Route path='/recomendados'
+              element={<DocList />}
+            />
+            <Route path='/login'
+              element={<Login />}
+            />
+            <Route path='/verdoc'
+              element={<Stream />}
+            />
+          </Routes>
           {/* <Home /> 
           <Catalog /> */}
         </ThemeProvider>

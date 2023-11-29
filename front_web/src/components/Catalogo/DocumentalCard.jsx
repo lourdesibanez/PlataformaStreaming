@@ -1,4 +1,6 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom";
+
 
 const DocumentalCard = ( { doc } ) => {
   return (
@@ -9,11 +11,14 @@ const DocumentalCard = ( { doc } ) => {
         layout 
         >
         <h2 className="catalog-img-title">{doc.titulo}</h2>
-        <img 
+        <Link to="/verdoc">
+          <img 
             src={doc.img}
             alt={`path to: ${doc.titulo}`}
             className="catalog-img"
             />
+        </Link>
+            
     </motion.div>
   )
 }
