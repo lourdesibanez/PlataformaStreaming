@@ -15,6 +15,6 @@ Una copia de la db utilizada esta en la carpeta raíz.
 
 
 ## Integrantes del grupo 5: 
-Martín Dal Santo
-Lourdes Ibañez 
+Martín Dal Santo,
+Lourdes Ibañez ,
 Nicolás Lucero 
