@@ -14,7 +14,7 @@ Por otro lado para correr el frontend, "ruta: plataformastreaming/front_web" -> 
 Una copia de la db utilizada esta en la carpeta raíz. 
 
 
-## Integrantes del grupo 5: 
+## Integrantes del equipo: 
 Martín Dal Santo,
 Lourdes Ibañez ,
 Nicolás Lucero 
