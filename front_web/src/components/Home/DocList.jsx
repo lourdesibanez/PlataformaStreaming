@@ -26,6 +26,8 @@ const DocList = () => {
 
     const fetchDocs = async (token) => {
         try {
+
+            // use a global file for the urls
             const res = await fetch('http://localhost:8888/recomendados/1', {
                 method: 'GET',
                 headers: {
